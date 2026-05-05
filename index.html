@@ -1095,14 +1095,24 @@
     <div class="form-timeline reveal">
       <!-- ✏️ EDITE: formações e anos -->
       <div class="form-entry">
-        <div class="form-year">2024</div>
+        <div class="form-year">2025</div>
         <div class="form-degree">Especialização em Reabilitação de Joelho</div>
         <div class="form-inst">Grupo Joelho em Evidência</div>
       </div>
       <div class="form-entry">
-        <div class="form-year">2022</div>
+        <div class="form-year">2025</div>
+        <div class="form-degree">Formação no Método Felipe Fumê - Reabilitação de Pós Operatório de Joelho - Módulo Avançado</div>
+        <div class="form-inst">Felipe Fumê</div>
+      </div>
+      <div class="form-entry">
+        <div class="form-year">2024</div>
+        <div class="form-degree">Formação no Método Felipe Fumê - Reabilitação de Pós Operatório de Joelho - Módulo 1</div>
+        <div class="form-inst">Felipe Fumê</div>
+      </div>
+      <div class="form-entry">
+        <div class="form-year">2020</div>
         <div class="form-degree">Pós-Graduação em Fisioterapia Traumato-Ortopédica e Desportiva</div>
-        <div class="form-inst">Faculdade João Pessoa</div>
+        <div class="form-inst">Centro Universitário de João Pessoa</div>
       </div>
       <div class="form-entry">
         <div class="form-year">2017</div>
@@ -1137,10 +1147,18 @@
       </div>
     </div>
 
+    <!-- Botão Ver mais fotos — some após clique, carrega paciente16...30 só agora -->
+    <button id="btn-ver-mais" onclick="loadMorePac()" style="display:inline-flex;align-items:center;gap:10px;margin-top:28px;background:transparent;color:rgba(255,255,255,0.55);border:1px solid rgba(255,255,255,0.2);padding:12px 22px;font-family:'Instrument Sans',sans-serif;font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:border-color 0.2s,color 0.2s;" onmouseover="this.style.borderColor='rgba(255,255,255,0.5)';this.style.color='white'" onmouseout="this.style.borderColor='rgba(255,255,255,0.2)';this.style.color='rgba(255,255,255,0.55)'">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+      Ver mais fotos
+    </button>
+
     <!-- ✏️ EDITE: link do Instagram -->
-    <a href="https://instagram.com/danieloliveirafisio" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;margin-top:24px;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.4);border-bottom:1px solid rgba(255,255,255,0.15);padding-bottom:2px;">
-      Ver mais no Instagram →
-    </a>
+    <div style="margin-top:14px;">
+      <a href="https://instagram.com/danieloliveirafisio" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.4);border-bottom:1px solid rgba(255,255,255,0.15);padding-bottom:2px;">
+        Ver mais no Instagram →
+      </a>
+    </div>
   </section>
 
   <!-- ═══════════ CTA FINAL ═══════════ -->
@@ -1252,37 +1270,48 @@
        CARROSSEL PACIENTES
        ✏️ Coloque fotos em: imagens/pacientes/paciente1.jpg ... paciente15.jpg
     ════════════════════════════════ */
-    const PAC_COUNT = 15;
-    const PAC_PHOTOS = Array.from({ length: PAC_COUNT }, (_, i) => ({
+    /* ════════════════════════════════
+       CARROSSEL PACIENTES
+       ✏️ Coloque fotos em: imagens/pacientes/paciente1.jpg ... paciente30.jpg
+       - As 15 primeiras carregam com a página
+       - As 15 seguintes carregam só quando o usuário clicar em "Ver mais fotos"
+    ════════════════════════════════ */
+    const PAC_INITIAL = 15; // fotos visíveis de início
+    const PAC_EXTRA   = 15; // fotos carregadas ao clicar "Ver mais"
+
+    const PAC_PHOTOS = Array.from({ length: PAC_INITIAL }, (_, i) => ({
       src: `imagens/pacientes/paciente${i + 1}.jpg`,
       alt: `Resultado paciente ${i + 1}`
     }));
+
+    const PAC_EXTRA_PHOTOS = Array.from({ length: PAC_EXTRA }, (_, i) => ({
+      src: `imagens/pacientes/paciente${PAC_INITIAL + i + 1}.jpg`,
+      alt: `Resultado paciente ${PAC_INITIAL + i + 1}`
+    }));
+
     let pacIdx = 0;
+    let pacLoaded = PAC_PHOTOS; // fotos atualmente no carrossel
 
-    function buildPacCarousel() {
-      const track = document.getElementById('pac-track');
+    function addSlide(track, p) {
+      const slide = document.createElement('div');
+      slide.className = 'pac-slide';
+      slide.innerHTML = `<div class="img-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="1"/></svg></div>`;
+      const img = new Image();
+      img.onload = () => {
+        const imgEl = document.createElement('img');
+        imgEl.src = p.src; imgEl.alt = p.alt;
+        slide.innerHTML = '';
+        slide.appendChild(imgEl);
+      };
+      img.onerror = () => {};
+      img.src = p.src;
+      track.appendChild(slide);
+    }
+
+    function rebuildDots() {
       const dotsEl = document.getElementById('pac-dots');
-      track.innerHTML = '';
       dotsEl.innerHTML = '';
-
-      PAC_PHOTOS.forEach((p, i) => {
-        const slide = document.createElement('div');
-        slide.className = 'pac-slide';
-        slide.innerHTML = `<div class="img-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="1"/></svg></div>`;
-
-        const img = new Image();
-        img.onload = () => {
-          const imgEl = document.createElement('img');
-          imgEl.src = p.src; imgEl.alt = p.alt;
-          slide.innerHTML = '';
-          slide.appendChild(imgEl);
-        };
-        img.onerror = () => {};
-        img.src = p.src;
-        track.appendChild(slide);
-      });
-
-      const steps = Math.ceil(PAC_PHOTOS.length / 2);
+      const steps = Math.ceil(pacLoaded.length / 2);
       for (let i = 0; i < steps; i++) {
         const dot = document.createElement('button');
         dot.className = 'dot' + (i === 0 ? ' active' : '');
@@ -1291,8 +1320,26 @@
       }
     }
 
+    function buildPacCarousel() {
+      const track = document.getElementById('pac-track');
+      track.innerHTML = '';
+      PAC_PHOTOS.forEach(p => addSlide(track, p));
+      rebuildDots();
+    }
+
+    function loadMorePac() {
+      const track = document.getElementById('pac-track');
+      PAC_EXTRA_PHOTOS.forEach(p => addSlide(track, p));
+      pacLoaded = [...PAC_PHOTOS, ...PAC_EXTRA_PHOTOS];
+      rebuildDots();
+
+      // Remove o botão "Ver mais"
+      const btn = document.getElementById('btn-ver-mais');
+      if (btn) btn.style.display = 'none';
+    }
+
     function goPac(n) {
-      const max = PAC_PHOTOS.length - 2;
+      const max = pacLoaded.length - 2;
       pacIdx = Math.max(0, Math.min(n, max));
       const slideW = document.querySelector('.pac-slide')?.offsetWidth || 0;
       document.getElementById('pac-track').style.transform = `translateX(-${pacIdx * (slideW + 10)}px)`;
