@@ -786,17 +786,26 @@
       background: rgba(0,0,0,0.92);
       pointer-events: all;
     }
+    /* Todos os filhos ficam invisíveis por padrão */
+    #lightbox > * {
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+    /* Só aparecem quando o lightbox está aberto */
+    #lightbox.open > * {
+      opacity: 1;
+      pointer-events: all;
+    }
     #lightbox-img {
       max-width: 92vw;
       max-height: 82vh;
       object-fit: contain;
       border-radius: 3px;
-      opacity: 0;
       transform: scale(0.92);
       transition: opacity 0.3s ease, transform 0.3s ease;
     }
     #lightbox.open #lightbox-img {
-      opacity: 1;
       transform: scale(1);
     }
     #lightbox-close {
@@ -810,7 +819,7 @@
       cursor: pointer;
       line-height: 1;
       padding: 6px;
-      transition: color 0.2s;
+      transition: opacity 0.3s ease, color 0.2s;
     }
     #lightbox-close:hover { color: white; }
     #lightbox-prev, #lightbox-next {
@@ -827,7 +836,7 @@
       justify-content: center;
       cursor: pointer;
       font-size: 1.1rem;
-      transition: background 0.2s;
+      transition: opacity 0.3s ease, background 0.2s;
     }
     #lightbox-prev:hover, #lightbox-next:hover { background: rgba(255,255,255,0.18); }
     #lightbox-prev { left: 14px; }
@@ -841,6 +850,7 @@
       color: rgba(255,255,255,0.4);
       letter-spacing: 0.12em;
       text-transform: uppercase;
+      transition: opacity 0.3s ease;
     }
 
     /* ─── CTA FINAL ─── */
