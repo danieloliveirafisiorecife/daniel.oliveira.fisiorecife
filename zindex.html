@@ -958,6 +958,196 @@
     }
     .fab-wpp svg { width: 26px; height: 26px; }
 
+    /* ─── DEPOIMENTOS ─── */
+    .dep-list {
+      margin-top: 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .dep-item {
+      padding: 28px 0;
+      border-bottom: 1px solid var(--gray-ll);
+      position: relative;
+    }
+    .dep-item:first-child {
+      border-top: 1px solid var(--gray-ll);
+    }
+
+    .dep-aspas {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: var(--gold-l);
+      line-height: 0.6;
+      margin-bottom: 12px;
+      opacity: 0.6;
+      display: block;
+    }
+
+    .dep-texto {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(0.95rem, 3.5vw, 1.08rem);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--black);
+      line-height: 1.65;
+      margin-bottom: 18px;
+    }
+
+    .dep-footer {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .dep-linha {
+      width: 20px;
+      height: 1px;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .dep-autor {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--black);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .dep-detalhe {
+      font-size: 0.68rem;
+      color: var(--gray);
+      font-weight: 400;
+      margin-top: 1px;
+    }
+
+    /* ─── FORMULÁRIO DEPOIMENTO ─── */
+    .form-dep {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .form-dep-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 16px;
+    }
+
+    .form-dep-field {
+      display: flex;
+      flex-direction: column;
+      border-bottom: 1px solid var(--gray-ll);
+      padding: 16px 0 12px;
+    }
+
+    .form-dep-field:not(:last-child) {
+      margin-bottom: 0;
+    }
+
+    .form-dep-label {
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 8px;
+    }
+
+    .form-dep-field input,
+    .form-dep-field textarea {
+      background: transparent;
+      border: none;
+      outline: none;
+      font-family: 'Playfair Display', serif;
+      font-size: 0.95rem;
+      font-style: italic;
+      color: var(--black);
+      width: 100%;
+      resize: none;
+      line-height: 1.6;
+    }
+
+    .form-dep-field input::placeholder,
+    .form-dep-field textarea::placeholder {
+      color: var(--gray-l);
+    }
+
+    .form-dep-field:focus-within {
+      border-bottom-color: var(--gold);
+    }
+
+    .form-dep-field:focus-within .form-dep-label {
+      color: var(--gold);
+    }
+
+    .form-dep-textarea {
+      border-top: 1px solid var(--gray-ll);
+      margin-top: 0;
+    }
+
+    .form-dep-char {
+      font-size: 0.62rem;
+      color: var(--gray-l);
+      text-align: right;
+      margin-top: 6px;
+      transition: color 0.2s;
+    }
+    .form-dep-char.over { color: #c0392b; }
+
+    .form-dep-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 24px;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .form-dep-nota {
+      font-size: 0.68rem;
+      color: var(--gray);
+      font-style: italic;
+      flex: 1;
+    }
+
+    .btn-dep-enviar {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--black);
+      color: white;
+      border: none;
+      padding: 13px 24px;
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s;
+      flex-shrink: 0;
+    }
+    .btn-dep-enviar:hover { background: var(--gold); }
+    .btn-dep-enviar:disabled { background: var(--gray-l); cursor: not-allowed; }
+
+    .form-dep-status {
+      margin-top: 16px;
+      font-size: 0.78rem;
+      font-style: italic;
+      display: none;
+    }
+    .form-dep-status.ok  { color: #2d6e34; display: block; }
+    .form-dep-status.err { color: #c0392b; display: block; }
+
+    @media (max-width: 540px) {
+      .form-dep-row { grid-template-columns: 1fr; }
+    }
+
     /* ─── REVEAL ─── */
     .reveal {
       opacity: 0;
@@ -1249,6 +1439,127 @@
         Ver mais no Instagram →
       </a>
     </div>
+  </section>
+
+  <!-- ═══════════ DEPOIMENTOS ═══════════ -->
+  <section class="section" id="depoimentos">
+    <div class="section-label reveal">O que dizem os pacientes</div>
+    <h2 class="section-title reveal">Resultados que<br><em>falam por si</em></h2>
+
+    <div class="dep-list">
+
+      <!-- ✏️ DEPOIMENTO 1 -->
+      <div class="dep-item reveal">
+        <span class="dep-aspas">"</span>
+        <p class="dep-texto">Depois de meses com dor no joelho e sem perspectiva, encontrei no Daniel um profissional que realmente ouviu o meu caso. O tratamento foi preciso, o processo foi claro do começo ao fim — e voltei a correr em menos tempo do que eu imaginava.</p>
+        <div class="dep-footer">
+          <div class="dep-linha"></div>
+          <div>
+            <div class="dep-autor">Nome do Paciente</div>
+            <div class="dep-detalhe">Reabilitação pós-operatória de joelho</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ✏️ DEPOIMENTO 2 -->
+      <div class="dep-item reveal">
+        <span class="dep-aspas">"</span>
+        <p class="dep-texto">Fiz cirurgia no quadril e estava com muito medo da recuperação. O Daniel passou segurança desde a primeira avaliação. Cada etapa foi explicada, cada exercício tinha um motivo. Hoje estou sem dor e com qualidade de vida de volta.</p>
+        <div class="dep-footer">
+          <div class="dep-linha"></div>
+          <div>
+            <div class="dep-autor">Nome do Paciente</div>
+            <div class="dep-detalhe">Pós-operatório de quadril</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ✏️ DEPOIMENTO 3 -->
+      <div class="dep-item reveal">
+        <span class="dep-aspas">"</span>
+        <p class="dep-texto">O que me surpreendeu foi a atenção individualizada. Nunca me senti um número. O Daniel conhecia minha evolução sessão a sessão, ajustava o plano conforme eu precisava. Resultado: alta funcional antes do prazo previsto pelo médico.</p>
+        <div class="dep-footer">
+          <div class="dep-linha"></div>
+          <div>
+            <div class="dep-autor">Nome do Paciente</div>
+            <div class="dep-detalhe">Reabilitação musculoesquelética</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ✏️ DEPOIMENTO 4 -->
+      <div class="dep-item reveal">
+        <span class="dep-aspas">"</span>
+        <p class="dep-texto">Fiz acompanhamento online com o Daniel morando em outro estado. Achei que seria difícil, mas a comunicação foi impecável, os exercícios foram adaptados para minha realidade e os resultados vieram. Recomendo sem hesitar.</p>
+        <div class="dep-footer">
+          <div class="dep-linha"></div>
+          <div>
+            <div class="dep-autor">Nome do Paciente</div>
+            <div class="dep-detalhe">Atendimento online · São Paulo, SP</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ✏️ DEPOIMENTO 5 -->
+      <div class="dep-item reveal">
+        <span class="dep-aspas">"</span>
+        <p class="dep-texto">Tentei outros fisioterapeutas antes e não tive resultado. Com o Daniel foi diferente desde o primeiro dia — avaliação detalhada, explicações claras e um plano que de fato fez sentido para o meu corpo. Hoje não tenho mais limitações no dia a dia.</p>
+        <div class="dep-footer">
+          <div class="dep-linha"></div>
+          <div>
+            <div class="dep-autor">Nome do Paciente</div>
+            <div class="dep-detalhe">Reabilitação de joelho · Recife, PE</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════ FORMULÁRIO DEPOIMENTO ═══════════ -->
+  <section class="section" id="enviar-depoimento" style="background: var(--gray-ll);">
+    <div class="section-label reveal">Deixe o seu relato</div>
+    <h2 class="section-title reveal">Quer compartilhar<br><em>sua experiência?</em></h2>
+
+    <p class="body-text reveal" style="margin-bottom: 0;">
+      Se o acompanhamento do Daniel fez diferença na sua recuperação, sua história pode inspirar outras pessoas. Preencha abaixo — Daniel avalia cada depoimento antes de publicar.
+    </p>
+
+    <!-- ✏️ EDITE: substitua SEU_ENDPOINT_AQUI pelo endpoint do Formspree -->
+    <!-- Exemplo: https://formspree.io/f/xyzabc12 -->
+    <form class="form-dep reveal" id="formDep" action="https://formspree.io/f/SEU_ENDPOINT_AQUI" method="POST">
+
+      <div class="form-dep-row">
+        <div class="form-dep-field">
+          <label class="form-dep-label" for="dep-nome">Nome</label>
+          <input type="text" id="dep-nome" name="nome" placeholder="Seu nome" required maxlength="60">
+        </div>
+        <div class="form-dep-field">
+          <label class="form-dep-label" for="dep-sobrenome">Sobrenome</label>
+          <input type="text" id="dep-sobrenome" name="sobrenome" placeholder="Seu sobrenome" required maxlength="60">
+        </div>
+      </div>
+
+      <div class="form-dep-field form-dep-textarea">
+        <label class="form-dep-label" for="dep-texto">Depoimento</label>
+        <textarea id="dep-texto" name="depoimento" rows="5" placeholder="Conte sua experiência com o tratamento…" required maxlength="350"></textarea>
+        <div class="form-dep-char" id="dep-char">0 / 320 caracteres recomendados</div>
+      </div>
+
+      <!-- Campo oculto para identificar a origem -->
+      <input type="hidden" name="_subject" value="Novo depoimento recebido pelo site">
+      <input type="hidden" name="_next" value="">
+
+      <div class="form-dep-footer">
+        <span class="form-dep-nota">Seu depoimento será avaliado antes de ser publicado.</span>
+        <button type="submit" class="btn-dep-enviar" id="btn-enviar">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          Enviar depoimento
+        </button>
+      </div>
+
+      <div class="form-dep-status" id="dep-status"></div>
+    </form>
   </section>
 
   <!-- ═══════════ CTA FINAL ═══════════ -->
@@ -1545,6 +1856,57 @@
       { threshold: 0.08 }
     );
     document.querySelectorAll('.reveal').forEach(r => io.observe(r));
+    /* ════════════════════════════════
+       FORMULÁRIO DEPOIMENTO (Formspree)
+    ════════════════════════════════ */
+    (function () {
+      const textarea = document.getElementById('dep-texto');
+      const charEl   = document.getElementById('dep-char');
+      const form     = document.getElementById('formDep');
+      const btn      = document.getElementById('btn-enviar');
+      const status   = document.getElementById('dep-status');
+
+      if (!textarea) return;
+
+      textarea.addEventListener('input', () => {
+        const n = textarea.value.length;
+        charEl.textContent = n + ' / 320 caracteres recomendados';
+        charEl.classList.toggle('over', n > 350);
+      });
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        btn.disabled = true;
+        btn.textContent = 'Enviando…';
+        status.className = 'form-dep-status';
+        status.textContent = '';
+
+        try {
+          const res = await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { 'Accept': 'application/json' }
+          });
+
+          if (res.ok) {
+            status.textContent = 'Depoimento enviado! Daniel vai analisar em breve. Obrigado 🙏';
+            status.className = 'form-dep-status ok';
+            form.reset();
+            charEl.textContent = '0 / 320 caracteres recomendados';
+            charEl.classList.remove('over');
+            btn.textContent = 'Enviado ✓';
+          } else {
+            throw new Error();
+          }
+        } catch {
+          status.textContent = 'Não foi possível enviar. Tente novamente ou entre em contato pelo WhatsApp.';
+          status.className = 'form-dep-status err';
+          btn.disabled = false;
+          btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Enviar depoimento';
+        }
+      });
+    })();
+
   </script>
 </body>
 </html>
