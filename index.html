@@ -742,24 +742,33 @@
       min-width: calc(50% - 5px);
       flex-shrink: 0;
       cursor: pointer;
+      position: relative;
     }
 
-    .pac-slide img {
+    /* Padding-bottom trick: garante altura proporcional antes da imagem carregar.
+       Funciona no Safari/iOS que não respeita aspect-ratio em imgs dinâmicas.
+       133.33% = proporção 3:4 (altura = largura * 4/3) */
+    .pac-slide::before {
+      content: '';
+      display: block;
+      padding-bottom: 133.33%;
+    }
+
+    .pac-slide img,
+    .pac-slide .img-placeholder {
+      position: absolute;
+      inset: 0;
       width: 100%;
-      aspect-ratio: 3/4;
+      height: 100%;
       object-fit: cover;
       object-position: center top;
       display: block;
       border-radius: 2px;
-      transition: opacity 0.2s;
     }
-    .pac-slide:hover img { opacity: 0.85; }
 
-    .pac-slide .img-placeholder {
-      width: 100%;
-      aspect-ratio: 3/4;
-      background: #111;
-    }
+    .pac-slide img { transition: opacity 0.2s; }
+    .pac-slide:hover img { opacity: 0.85; }
+    .pac-slide .img-placeholder { background: #111; }
 
     .pac-ctrl {
       display: flex;
@@ -1710,7 +1719,11 @@
       img.onload = () => {
         const imgEl = document.createElement('img');
         imgEl.src = p.src; imgEl.alt = p.alt;
-        slide.innerHTML = '';
+        // Estilos inline garantem compatibilidade com Safari/iOS
+        imgEl.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;display:block;border-radius:2px;';
+        // Remove placeholder mantendo o ::before (que define a altura)
+        const placeholder = slide.querySelector('.img-placeholder');
+        if (placeholder) placeholder.remove();
         slide.appendChild(imgEl);
       };
       img.onerror = () => {};
