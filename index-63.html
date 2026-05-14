@@ -1,0 +1,2024 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daniel Oliveira | Fisioterapeuta — Joelho & Quadril</title>
+  <link rel="icon" href="favicondaniel.ico">
+  <meta name="description" content="Fisioterapeuta especialista em joelho e quadril. Do pré ao pós-operatório — clareza, método e acompanhamento individual em Recife." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Instrument+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:   #0a0a0a;
+      --white:   #f8f7f4;
+      --green:   #1a4a1f;
+      --green-m: #2d6e34;
+      --green-l: #4a9e55;
+      --gold:    #b8882a;
+      --gold-l:  #d4a84b;
+      --gray:    #888880;
+      --gray-l:  #c8c7c0;
+      --gray-ll: #e8e7e0;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Instrument Sans', sans-serif;
+      background: var(--white);
+      color: var(--black);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    /* ─── LINHA DOURADA VERTICAL (decorativa) ─── */
+    .gold-rule {
+      position: fixed;
+      left: 18px;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent 0%, var(--gold) 15%, var(--gold) 85%, transparent 100%);
+      opacity: 0.5;
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: transparent;
+      padding: 18px 24px 18px 38px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.4s, border-color 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .nav-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      color: white;
+    }
+
+    .nav-spec {
+      font-size: 0.55rem;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--gold-l);
+      font-weight: 500;
+      margin-top: 2px;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-ig {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 0.2s;
+    }
+    .nav-ig:hover { transform: scale(1.1); }
+    .nav-ig svg { width: 15px; height: 15px; }
+
+    .btn-nav {
+      background: transparent;
+      color: white;
+      padding: 9px 18px;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,0.35);
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .btn-nav:hover { background: var(--gold); border-color: var(--gold); }
+
+    /* ─── HERO ─── */
+    #hero {
+      min-height: 100svh;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      background: var(--black);
+      overflow: hidden;
+    }
+
+    /* Foto de fundo — placeholder cinza escuro com grain */
+    .hero-photo-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    /* Placeholder artístico quando não há foto */
+    .hero-photo-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 90% at 72% 40%, rgba(26,74,31,0.18) 0%, transparent 65%),
+        radial-gradient(ellipse 60% 70% at 30% 80%, rgba(184,136,42,0.08) 0%, transparent 60%),
+        linear-gradient(168deg, #0d0d0d 0%, #111a12 45%, #0a0a0a 100%);
+      z-index: 0;
+    }
+
+    /* Slot para a foto real do Daniel */
+    .hero-photo-img {
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 62%;
+      object-fit: cover;
+      object-position: center top;
+      z-index: 1;
+      /* Máscara: desvanesce à esquerda */
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 28%, black 100%);
+      mask-image: linear-gradient(to right, transparent 0%, black 28%, black 100%);
+    }
+
+    /* Overlay gradiente sobre a foto */
+    .hero-photo-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to right, rgba(10,10,10,1) 0%, rgba(10,10,10,0.75) 42%, rgba(10,10,10,0.1) 100%),
+        linear-gradient(to top, rgba(10,10,10,0.9) 0%, transparent 35%);
+      z-index: 2;
+    }
+
+    /* Placeholder visual quando não há foto — silhueta elegante */
+    .hero-photo-placeholder {
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 60%;
+      z-index: 1;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 80px;
+      overflow: hidden;
+    }
+    .hero-photo-placeholder::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(160deg, rgba(26,74,31,0.12) 0%, transparent 50%);
+    }
+    /* Grade sutil estilo laudo médico */
+    .hero-photo-placeholder::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(255,255,255,0.02) 39px, rgba(255,255,255,0.02) 40px),
+        repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(255,255,255,0.02) 39px, rgba(255,255,255,0.02) 40px);
+    }
+
+    .hero-photo-label {
+      position: relative;
+      z-index: 3;
+      text-align: center;
+      color: rgba(255,255,255,0.12);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .hero-inner {
+      padding: 110px 28px 0 38px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      z-index: 10;
+      max-width: 380px;
+    }
+
+    .hero-kicker {
+      font-size: 0.58rem;
+      text-transform: uppercase;
+      letter-spacing: 0.28em;
+      color: var(--gold-l);
+      font-weight: 600;
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .hero-kicker::before {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.6rem, 11vw, 3.8rem);
+      font-weight: 900;
+      line-height: 1.02;
+      color: white;
+      margin-bottom: 8px;
+    }
+
+    .hero-title-em {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--gold-l);
+    }
+
+    .hero-subtitle {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1rem, 3.8vw, 1.35rem);
+      font-weight: 400;
+      font-style: italic;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 36px;
+      line-height: 1.4;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      margin-bottom: 42px;
+    }
+
+    .hero-meta-item {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.7);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 400;
+    }
+
+    .hero-meta-item::before {
+      content: '';
+      display: block;
+      width: 4px;
+      height: 4px;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .hero-cta-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--black);
+      padding: 14px 24px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s;
+    }
+    .btn-primary:hover { background: var(--gold-l); }
+    .btn-primary svg { fill: var(--black); }
+
+    .btn-outline {
+      border: 1px solid rgba(255,255,255,0.3);
+      color: rgba(255,255,255,0.75);
+      padding: 14px 22px;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { border-color: white; color: white; }
+
+    /* Hero bottom strip */
+    .hero-strip {
+      position: relative;
+      z-index: 10;
+      margin-top: auto;
+      background: rgba(255,255,255,0.04);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 22px 28px 22px 38px;
+      display: flex;
+      gap: 0;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .hero-strip::-webkit-scrollbar { display: none; }
+
+    .strip-item {
+      flex-shrink: 0;
+      padding: 0 28px 0 0;
+      border-right: 1px solid rgba(255,255,255,0.12);
+      margin-right: 28px;
+    }
+    .strip-item:last-child { border-right: none; margin-right: 0; padding-right: 0; }
+
+    .strip-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--gold-l);
+      line-height: 1;
+    }
+
+    .strip-label {
+      font-size: 0.62rem;
+      color: rgba(255,255,255,0.5);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-top: 3px;
+      white-space: nowrap;
+    }
+
+    /* ─── SEÇÃO GENÉRICA ─── */
+    .section {
+      padding: 72px 28px 72px 38px;
+      border-top: 1px solid var(--gray-ll);
+    }
+
+    .section-black {
+      background: var(--black);
+      color: var(--white);
+      border-top: none;
+    }
+
+    .section-green {
+      background: var(--green);
+      color: var(--white);
+      border-top: none;
+    }
+
+    .section-label {
+      font-size: 0.58rem;
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 20px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .section-black .section-label,
+    .section-green .section-label {
+      color: var(--gold-l);
+    }
+    .section-black .section-label::before,
+    .section-green .section-label::before {
+      background: var(--gold-l);
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 7vw, 2.6rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+
+    .section-title em {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--green-m);
+    }
+
+    .section-black .section-title em { color: var(--gold-l); }
+    .section-green .section-title em { color: rgba(255,255,255,0.6); }
+
+    .body-text {
+      font-size: 0.88rem;
+      line-height: 1.8;
+      color: var(--gray);
+    }
+
+    .section-black .body-text { color: rgba(255,255,255,0.6); }
+    .section-green .body-text { color: rgba(255,255,255,0.75); }
+
+    /* ─── CARROSSEL FISIO ─── */
+    .carousel-wrap {
+      position: relative;
+      overflow: hidden;
+      margin-top: 32px;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      position: relative;
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    .img-placeholder {
+      width: 100%;
+      aspect-ratio: 4/5;
+      background: #111;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: rgba(255,255,255,0.25);
+      font-family: 'Playfair Display', serif;
+      font-size: 0.9rem;
+      font-style: italic;
+    }
+    .img-placeholder svg { width: 36px; height: 36px; opacity: 0.2; }
+
+    .carousel-caption-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 14px;
+    }
+
+    .carousel-caption-text {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.4);
+      font-style: italic;
+    }
+
+    .carousel-controls {
+      display: flex;
+      gap: 2px;
+    }
+
+    .c-btn {
+      width: 36px;
+      height: 36px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: transparent;
+      color: white;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    .c-btn:hover { background: rgba(255,255,255,0.08); }
+
+    .carousel-dots {
+      display: flex;
+      gap: 6px;
+      margin-top: 16px;
+    }
+
+    .dot {
+      width: 24px;
+      height: 2px;
+      background: rgba(255,255,255,0.2);
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, width 0.2s;
+      padding: 0;
+    }
+    .dot.active {
+      background: var(--gold-l);
+      width: 40px;
+    }
+
+    /* ─── APRESENTAÇÃO ─── */
+    .apres-body {
+      margin-top: 28px;
+    }
+
+    .apres-body p {
+      font-size: 0.88rem;
+      line-height: 1.85;
+      color: var(--gray);
+      margin-bottom: 14px;
+    }
+    .apres-body p:last-child { margin-bottom: 0; }
+
+    .apres-creds {
+      margin-top: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .cred-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--gray-ll);
+    }
+
+    .cred-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--green-m);
+      line-height: 1;
+      flex-shrink: 0;
+      width: 36px;
+    }
+
+    .cred-text {
+      font-size: 0.8rem;
+      color: var(--gray);
+      line-height: 1.4;
+    }
+
+    .cred-title {
+      font-weight: 600;
+      color: var(--black);
+      font-size: 0.82rem;
+      margin-bottom: 2px;
+    }
+
+    /* Redes Sociais */
+    .redes-wrap {
+      margin-top: 36px;
+      border-top: 1px solid var(--gray-ll);
+      padding-top: 28px;
+    }
+
+    .redes-title-sm {
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--gray);
+      margin-bottom: 16px;
+    }
+
+    .redes-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .rede-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--gray-ll);
+      transition: padding-left 0.2s;
+    }
+    .rede-row:hover { padding-left: 6px; }
+    .rede-row:last-child { border-bottom: none; }
+
+    .rede-icon-sq {
+      width: 34px;
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1rem;
+    }
+    .rede-icon-sq.ig { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+    .rede-icon-sq.yt { background: #ff0000; }
+    .rede-icon-sq.wpp { background: #25d366; }
+
+    .rede-info { flex: 1; }
+    .rede-handle-name { font-weight: 600; font-size: 0.82rem; color: var(--black); }
+    .rede-handle-sub { font-size: 0.68rem; color: var(--gray); }
+    .rede-arrow { color: var(--gray-l); font-size: 0.8rem; }
+
+    /* ─── ESPECIALIDADES ─── */
+    .esp-list {
+      margin-top: 28px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .esp-item {
+      display: flex;
+      gap: 20px;
+      padding: 24px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      align-items: flex-start;
+    }
+    .esp-item:last-child { border-bottom: none; }
+
+    .esp-index {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.1);
+      line-height: 1;
+      flex-shrink: 0;
+      width: 48px;
+    }
+
+    .esp-content { flex: 1; }
+
+    .esp-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 6px;
+    }
+
+    .esp-desc {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.6;
+    }
+
+    /* ─── FORMAÇÃO ─── */
+    .form-timeline {
+      margin-top: 28px;
+      position: relative;
+    }
+
+    .form-timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--green-m), transparent);
+    }
+
+    .form-entry {
+      padding: 0 0 32px 24px;
+      position: relative;
+    }
+
+    .form-entry::before {
+      content: '';
+      position: absolute;
+      left: -3px;
+      top: 6px;
+      width: 7px;
+      height: 7px;
+      background: var(--green-m);
+    }
+
+    .form-year {
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--green-m);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .form-degree {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.02rem;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 3px;
+    }
+
+    .form-inst {
+      font-size: 0.78rem;
+      color: var(--gray);
+    }
+
+    /* ─── CARROSSEL PACIENTES ─── */
+    .pac-carousel-wrap {
+      overflow: hidden;
+      margin-top: 28px;
+    }
+
+    .pac-track {
+      display: flex;
+      gap: 10px;
+      transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .pac-slide {
+      min-width: calc(50% - 5px);
+      flex-shrink: 0;
+      cursor: pointer;
+      position: relative;
+    }
+
+    /* Padding-bottom trick: garante altura proporcional antes da imagem carregar.
+       Funciona no Safari/iOS que não respeita aspect-ratio em imgs dinâmicas.
+       133.33% = proporção 3:4 (altura = largura * 4/3) */
+    .pac-slide::before {
+      content: '';
+      display: block;
+      padding-bottom: 133.33%;
+    }
+
+    .pac-slide img,
+    .pac-slide .img-placeholder {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      border-radius: 2px;
+    }
+
+    .pac-slide img { transition: opacity 0.2s; }
+    .pac-slide:hover img { opacity: 0.85; }
+    .pac-slide .img-placeholder { background: #111; }
+
+    .pac-ctrl {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 16px;
+    }
+
+    .pac-dots { display: flex; gap: 6px; flex-wrap: wrap; }
+    .pac-navs { display: flex; gap: 2px; }
+
+    /* ─── LIGHTBOX ─── */
+    #lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      background: rgba(0,0,0,0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      transition: background 0.3s ease;
+    }
+    #lightbox.open {
+      background: rgba(0,0,0,0.92);
+      pointer-events: all;
+    }
+    /* Todos os filhos ficam invisíveis por padrão */
+    #lightbox > * {
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+    /* Só aparecem quando o lightbox está aberto */
+    #lightbox.open > * {
+      opacity: 1;
+      pointer-events: all;
+    }
+    #lightbox-img {
+      max-width: 92vw;
+      max-height: 82vh;
+      object-fit: contain;
+      border-radius: 3px;
+      transform: scale(0.92);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    #lightbox.open #lightbox-img {
+      transform: scale(1);
+    }
+    #lightbox-close {
+      position: absolute;
+      top: 18px;
+      right: 20px;
+      background: transparent;
+      border: none;
+      color: rgba(255,255,255,0.7);
+      font-size: 1.8rem;
+      cursor: pointer;
+      line-height: 1;
+      padding: 6px;
+      transition: opacity 0.3s ease, color 0.2s;
+    }
+    #lightbox-close:hover { color: white; }
+    #lightbox-prev, #lightbox-next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: white;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: opacity 0.3s ease, background 0.2s;
+    }
+    #lightbox-prev:hover, #lightbox-next:hover { background: rgba(255,255,255,0.18); }
+    #lightbox-prev { left: 14px; }
+    #lightbox-next { right: 14px; }
+    #lightbox-counter {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: opacity 0.3s ease;
+    }
+
+    /* ─── CTA FINAL ─── */
+    .cta-wrap {
+      text-align: left;
+    }
+
+    .cta-quote {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.3rem, 5vw, 1.8rem);
+      font-weight: 400;
+      font-style: italic;
+      color: rgba(255,255,255,0.7);
+      border-left: 3px solid var(--gold-l);
+      padding-left: 20px;
+      margin: 28px 0 36px;
+      line-height: 1.4;
+    }
+
+    .btn-wpp-big {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: white;
+      color: var(--green);
+      padding: 16px 28px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-wpp-big:hover { background: var(--gold-l); color: white; }
+
+    .cta-sub-note {
+      margin-top: 16px;
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.35);
+      font-style: italic;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: #050505;
+      padding: 36px 28px 36px 38px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .footer-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 4px;
+    }
+
+    .footer-crefito {
+      font-size: 0.65rem;
+      color: rgba(255,255,255,0.3);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .footer-divider {
+      width: 28px;
+      height: 1px;
+      background: var(--gold);
+      margin-bottom: 20px;
+    }
+
+    .footer-contacts {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.9;
+    }
+
+    .footer-copy {
+      margin-top: 24px;
+      font-size: 0.6rem;
+      color: rgba(255,255,255,0.15);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ─── FAB WhatsApp ─── */
+    .fab-wpp {
+      position: fixed;
+      bottom: 24px;
+      right: 22px;
+      width: 52px;
+      height: 52px;
+      background: #25d366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.35);
+      z-index: 200;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .fab-wpp:hover {
+      transform: scale(1.08);
+      box-shadow: 0 6px 28px rgba(37,211,102,0.5);
+    }
+    .fab-wpp svg { width: 26px; height: 26px; }
+
+    /* ─── DEPOIMENTOS ─── */
+    .dep-list {
+      margin-top: 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .dep-item {
+      padding: 28px 0;
+      border-bottom: 1px solid var(--gray-ll);
+      position: relative;
+    }
+    .dep-item:first-child {
+      border-top: 1px solid var(--gray-ll);
+    }
+
+    .dep-aspas {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: var(--gold-l);
+      line-height: 0.6;
+      margin-bottom: 12px;
+      opacity: 0.6;
+      display: block;
+    }
+
+    .dep-texto {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(0.95rem, 3.5vw, 1.08rem);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--black);
+      line-height: 1.65;
+      margin-bottom: 18px;
+    }
+
+    .dep-footer {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .dep-linha {
+      width: 20px;
+      height: 1px;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .dep-autor {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--black);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .dep-detalhe {
+      font-size: 0.68rem;
+      color: var(--gray);
+      font-weight: 400;
+      margin-top: 1px;
+    }
+
+    /* ─── FORMULÁRIO DEPOIMENTO ─── */
+    .form-dep {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .form-dep-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 16px;
+    }
+
+    .form-dep-field {
+      display: flex;
+      flex-direction: column;
+      border-bottom: 1px solid var(--gray-ll);
+      padding: 16px 0 12px;
+    }
+
+    .form-dep-field:not(:last-child) {
+      margin-bottom: 0;
+    }
+
+    .form-dep-label {
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 8px;
+    }
+
+    .form-dep-field input,
+    .form-dep-field textarea {
+      background: transparent;
+      border: none;
+      outline: none;
+      font-family: 'Playfair Display', serif;
+      font-size: 0.95rem;
+      font-style: italic;
+      color: var(--black);
+      width: 100%;
+      resize: none;
+      line-height: 1.6;
+    }
+
+    .form-dep-field input::placeholder,
+    .form-dep-field textarea::placeholder {
+      color: var(--gray-l);
+    }
+
+    .form-dep-field:focus-within {
+      border-bottom-color: var(--gold);
+    }
+
+    .form-dep-field:focus-within .form-dep-label {
+      color: var(--gold);
+    }
+
+    .form-dep-textarea {
+      border-top: 1px solid var(--gray-ll);
+      margin-top: 0;
+    }
+
+    .form-dep-char {
+      font-size: 0.62rem;
+      color: var(--gray-l);
+      text-align: right;
+      margin-top: 6px;
+      transition: color 0.2s;
+    }
+    .form-dep-char.over { color: #c0392b; }
+
+    .form-dep-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 24px;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .form-dep-nota {
+      font-size: 0.68rem;
+      color: var(--gray);
+      font-style: italic;
+      flex: 1;
+    }
+
+    .btn-dep-enviar {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--black);
+      color: white;
+      border: none;
+      padding: 13px 24px;
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s;
+      flex-shrink: 0;
+    }
+    .btn-dep-enviar:hover { background: var(--gold); }
+    .btn-dep-enviar:disabled { background: var(--gray-l); cursor: not-allowed; }
+
+    .form-dep-status {
+      margin-top: 16px;
+      font-size: 0.78rem;
+      font-style: italic;
+      display: none;
+    }
+    .form-dep-status.ok  { color: #2d6e34; display: block; }
+    .form-dep-status.err { color: #c0392b; display: block; }
+
+    @media (max-width: 540px) {
+      .form-dep-row { grid-template-columns: 1fr; }
+    }
+
+    /* ─── REVEAL ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ─── HERO ANIMATION ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-kicker  { animation: fadeUp 0.7s 0.1s both; }
+    .hero-title   { animation: fadeUp 0.7s 0.2s both; }
+    .hero-subtitle{ animation: fadeUp 0.7s 0.3s both; }
+    .hero-meta    { animation: fadeUp 0.7s 0.4s both; }
+    .hero-cta-row { animation: fadeUp 0.7s 0.5s both; }
+    .hero-strip   { animation: fadeUp 0.7s 0.65s both; }
+
+    /* REVELIO Studios */
+    .footer-site-link{
+  color: #c8a96b;
+  text-decoration: none;
+  transition: opacity .3s ease;
+}
+
+.footer-site-link:hover{
+  opacity: .7;
+}
+
+    /* ═══════════════════════════════════════════════
+       DESKTOP (≥ 900px) — mobile intocado
+    ═══════════════════════════════════════════════ */
+    @media (min-width: 900px) {
+
+      /* Linha dourada reposicionada */
+      .gold-rule { left: calc((100% - 860px) / 2 - 20px); }
+
+      /* Nav com padding alinhado ao conteúdo */
+      nav {
+        padding-left: calc((100% - 860px) / 2);
+        padding-right: calc((100% - 860px) / 2);
+      }
+
+      /* ── HERO ── */
+      .hero-inner {
+        max-width: 500px;
+        padding-top: 130px;
+        padding-left: calc((100% - 860px) / 2);
+        padding-right: 0;
+      }
+
+      .hero-title {
+        font-size: clamp(3.2rem, 4.2vw, 5.2rem);
+      }
+
+      .hero-strip {
+        padding-left: calc((100% - 860px) / 2);
+        padding-right: calc((100% - 860px) / 2);
+        gap: 0;
+      }
+      .strip-item {
+        padding-right: 40px;
+        margin-right: 40px;
+      }
+
+      /* ── SEÇÕES GENÉRICAS ── */
+      .section {
+        padding-left: calc((100% - 860px) / 2);
+        padding-right: calc((100% - 860px) / 2);
+        padding-top: 88px;
+        padding-bottom: 88px;
+      }
+
+      /* ── CARROSSEL FISIO — aspecto 16:9 no desktop ── */
+      .carousel-slide img,
+      .img-placeholder {
+        aspect-ratio: 16 / 9;
+      }
+
+      /* ── APRESENTAÇÃO ── */
+      .apres-body,
+      .apres-creds { max-width: 700px; }
+
+      /* ── ESPECIALIDADES — 3 colunas ── */
+      .spec-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+      }
+
+      /* ── PACIENTES — slides maiores ── */
+      .pac-slide {
+        min-width: calc(33.333% - 8px) !important;
+      }
+
+      /* ── DEPOIMENTOS — formulário em 2 colunas ── */
+      .form-dep-row {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      /* ── WHATSAPP FLUTUANTE ── */
+      .whatsapp-float {
+        bottom: 36px;
+        right: 36px;
+      }
+    }
+
+    /* ═══════════════════════════════════════════════
+       DESKTOP GRANDE (≥ 1200px)
+    ═══════════════════════════════════════════════ */
+    @media (min-width: 1200px) {
+
+      .gold-rule { left: calc((100% - 1000px) / 2 - 24px); }
+
+      nav {
+        padding-left: calc((100% - 1000px) / 2);
+        padding-right: calc((100% - 1000px) / 2);
+      }
+
+      .hero-inner {
+        max-width: 560px;
+        padding-left: calc((100% - 1000px) / 2);
+      }
+
+      .hero-strip {
+        padding-left: calc((100% - 1000px) / 2);
+        padding-right: calc((100% - 1000px) / 2);
+      }
+
+      .section {
+        padding-left: calc((100% - 1000px) / 2);
+        padding-right: calc((100% - 1000px) / 2);
+        padding-top: 100px;
+        padding-bottom: 100px;
+      }
+
+      .apres-body,
+      .apres-creds { max-width: 820px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Linha dourada vertical -->
+  <div class="gold-rule"></div>
+
+  <!-- ═══════════ NAV ═══════════ -->
+  <nav>
+    <div>
+      <div class="nav-name">Daniel Oliveira</div>
+      <div class="nav-spec">Fisioterapeuta · Joelho & Quadril</div>
+    </div>
+    <div class="nav-actions">
+      <!-- link do Instagram -->
+      <a href="https://instagram.com/danieloliveirafisio" class="nav-ig" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      </a>
+      <!-- número WhatsApp -->
+      <a href="https://wa.me/5581983383676?text=Oi,%20tudo%20bem%3F%20Gostaria%20de%20marcar%20uma%20consulta%21" class="btn-nav" target="_blank" rel="noopener">Agendar</a>
+    </div>
+  </nav>
+
+  <!-- ═══════════ HERO ═══════════ -->
+  <section id="hero">
+
+    <!-- CAMADA DE FOTO -->
+    <!-- Exemplo com foto real: <img src="imagens/daniel-hero.jpg" class="hero-photo-img" alt="Daniel Oliveira"> -->
+    <div class="hero-photo-bg">
+      <!-- Placeholder elegante quando não há foto -->
+      <div class="hero-photo-placeholder">
+        <div class="hero-photo-label">foto · Daniel Oliveira</div>
+      </div>
+    </div>
+
+    <div class="hero-inner">
+      <div class="hero-kicker">Fisioterapeuta · Recife</div>
+      <h1 class="hero-title">
+        Joelho e<br>quadril —
+        <br><span class="hero-title-em">do pré ao<br>pós-operatório.</span>
+      </h1>
+      <p class="hero-subtitle">Clareza, método e<br>acompanhamento individual.</p>
+      <div class="hero-meta">
+        <div class="hero-meta-item">Presencial em Recife · Online no Brasil</div>
+        <div class="hero-meta-item">Avaliação individualizada</div>
+        <div class="hero-meta-item">Evidência clínica em cada etapa</div>
+      </div>
+      <div class="hero-cta-row">
+        <!-- ✏️ EDITE: número WhatsApp -->
+        <a href="https://wa.me/5581983383676?text=Oi,%20tudo%20bem%3F%20Gostaria%20de%20marcar%20uma%20consulta%21" class="btn-primary" target="_blank" rel="noopener">
+          <svg width="15" height="15" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          Agendar consulta
+        </a>
+        <a href="#apresentacao" class="btn-outline">Sobre Daniel</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ CARROSSEL FISIO ═══════════ -->
+  <section class="section section-black" id="carrossel-fisio">
+    <div class="section-label">Em atendimento</div>
+    <h2 class="section-title">Técnica que<br><em>transforma resultados</em></h2>
+    <p class="body-text">Cada sessão é planejada com precisão — da avaliação ao exercício terapêutico, do pré-operatório à alta funcional.</p>
+
+    <div class="carousel-wrap" id="fisio-carousel">
+      <div class="carousel-track" id="fisio-track">
+        <!-- slides injetados por JS -->
+      </div>
+    </div>
+
+    <div class="carousel-caption-bar">
+      <div class="carousel-dots" id="fisio-dots"></div>
+      <div class="carousel-controls">
+        <button class="c-btn" onclick="moveCarousel('fisio',-1)">&#8592;</button>
+        <button class="c-btn" onclick="moveCarousel('fisio', 1)">&#8594;</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ APRESENTAÇÃO ═══════════ -->
+  <section class="section" id="apresentacao">
+    <div class="section-label reveal">Quem é Daniel</div>
+    <h2 class="section-title reveal">Fisioterapeuta<br><em>com método</em></h2>
+
+    <div class="apres-body reveal">
+      <!-- ✏️ EDITE: texto de apresentação -->
+      <p>Daniel Oliveira é fisioterapeuta especialista em reabilitação de joelho e quadril, com atuação clínica focada no período pré e pós-operatório. Seu trabalho é guiado por um princípio simples: cada paciente merece um plano real — não genérico.</p>
+      <p>Com formação sólida e atualização contínua, Daniel combina avaliação funcional detalhada com uma escuta ativa que transforma o acompanhamento em algo mais do que sessões — é processo, é vínculo, é resultado.</p>
+      <p>Atende presencialmente em Recife e realiza acompanhamentos online para pacientes em todo o Brasil.</p>
+    </div>
+
+    <div class="apres-creds reveal">
+      <div class="cred-item">
+        <div class="cred-num">01</div>
+        <div>
+          <div class="cred-title">Avaliação individual rigorosa</div>
+          <div class="cred-text">Cada caso é lido com cuidado. Nenhum protocolo copiado, nenhum atalho.</div>
+        </div>
+      </div>
+      <div class="cred-item">
+        <div class="cred-num">02</div>
+        <div>
+          <div class="cred-title">Clareza no processo</div>
+          <div class="cred-text">O paciente entende o que está sendo feito, por quê, e o que esperar em cada fase.</div>
+        </div>
+      </div>
+      <div class="cred-item">
+        <div class="cred-num">03</div>
+        <div>
+          <div class="cred-title">Acompanhamento real</div>
+          <div class="cred-text">Presença ativa do pré-op à alta funcional — sem sumir no meio do caminho.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="redes-wrap reveal">
+      <div class="redes-title-sm">Acompanhe nas redes</div>
+      <div class="redes-list">
+        <!-- ✏️ EDITE: links e handles -->
+        <a href="https://instagram.com/danieloliveirafisio" class="rede-row" target="_blank" rel="noopener">
+          <div class="rede-icon-sq ig">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </div>
+          <div class="rede-info">
+            <div class="rede-handle-name">@danieloliveirafisio</div>
+            <div class="rede-handle-sub">Conteúdo clínico · Instagram</div>
+          </div>
+          <div class="rede-arrow">→</div>
+        </a>
+        <a href="https://youtube.com/@danieloliveirafisio" class="rede-row" target="_blank" rel="noopener">
+          <div class="rede-icon-sq yt">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="white"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </div>
+          <div class="rede-info">
+            <div class="rede-handle-name">Daniel Oliveira Fisio</div>
+            <div class="rede-handle-sub">Educação em movimento · YouTube</div>
+          </div>
+          <div class="rede-arrow">→</div>
+        </a>
+        <a href="https://wa.me/5581983383676?text=Oi,%20tudo%20bem%3F%20Gostaria%20de%20marcar%20uma%20consulta%21" class="rede-row" target="_blank" rel="noopener">
+          <div class="rede-icon-sq wpp">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          </div>
+          <div class="rede-info">
+            <div class="rede-handle-name">WhatsApp</div>
+            <div class="rede-handle-sub">Agendamento direto</div>
+          </div>
+          <div class="rede-arrow">→</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ ESPECIALIDADES ═══════════ -->
+  <section class="section section-black" id="especialidades">
+    <div class="section-label reveal">Áreas de atuação</div>
+    <h2 class="section-title reveal">O que<br><em>Daniel trata</em></h2>
+
+    <div class="esp-list reveal">
+      <div class="esp-item">
+        <div class="esp-index">01</div>
+        <div class="esp-content">
+          <div class="esp-title">Reabilitação Pós-Operatória de Joelho</div>
+          <div class="esp-desc">LCA, menisco, prótese total. Protocolo por fase, retorno progressivo à função.</div>
+        </div>
+      </div>
+      <div class="esp-item">
+        <div class="esp-index">02</div>
+        <div class="esp-content">
+          <div class="esp-title">Reabilitação Pós-Operatória de Quadril</div>
+          <div class="esp-desc">Prótese total, artroscopia, displasia. Do período agudo à recuperação funcional completa.</div>
+        </div>
+      </div>
+      <div class="esp-item">
+        <div class="esp-index">03</div>
+        <div class="esp-content">
+          <div class="esp-title">Fisioterapia Pré-Operatória</div>
+          <div class="esp-desc">Preparação muscular e funcional antes da cirurgia — acelera a recuperação após o procedimento.</div>
+        </div>
+      </div>
+      <div class="esp-item">
+        <div class="esp-index">04</div>
+        <div class="esp-content">
+          <div class="esp-title">Dor e Disfunção Articular</div>
+          <div class="esp-desc">Osteoartrose, tendinopatias, síndrome patelofemoral. Tratamento conservador baseado em evidência.</div>
+        </div>
+      </div>
+      <div class="esp-item">
+        <div class="esp-index">05</div>
+        <div class="esp-content">
+          <div class="esp-title">Atendimento Online</div>
+          <div class="esp-desc">Orientação, prescrição de exercícios e acompanhamento à distância — para pacientes em todo o Brasil.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ FORMAÇÃO ═══════════ -->
+  <section class="section" id="formacao">
+    <div class="section-label reveal">Formação</div>
+    <h2 class="section-title reveal">Qualificação<br><em>que fundamenta</em></h2>
+
+     <div class="form-timeline reveal">
+      <!-- ✏️ EDITE: formações e anos -->
+      <div class="form-entry">
+        <div class="form-year">2025</div>
+        <div class="form-degree">Especialização em Reabilitação de Joelho</div>
+        <div class="form-inst">Grupo Joelho em Evidência</div>
+      </div>
+      <div class="form-entry">
+        <div class="form-year">2025</div>
+        <div class="form-degree">Formação no Método Felipe Fumê - Reabilitação de Pós Operatório de Joelho - Módulo Avançado</div>
+        <div class="form-inst">Centro de Reabilitação de Joelhos - Método Felipe Fumê [Londrina/PR]</div>
+      </div>
+      <div class="form-entry">
+        <div class="form-year">2024</div>
+        <div class="form-degree">Formação no Método Felipe Fumê - Reabilitação de Pós Operatório de Joelho - Módulo 1</div>
+        <div class="form-inst">Centro de Reabilitação de Joelhos - Método Felipe Fumê [Londrina/PR]</div>
+      </div>
+      <div class="form-entry">
+        <div class="form-year">2020</div>
+        <div class="form-degree">Pós-Graduação em Fisioterapia Traumato-Ortopédica e Desportiva</div>
+        <div class="form-inst">Centro Universitário de João Pessoa</div>
+      </div>
+      <div class="form-entry">
+        <div class="form-year">2017</div>
+        <div class="form-degree">Graduação em Fisioterapia</div>
+        <div class="form-inst">Centro Universitário São Miguel — Recife, PE</div>
+      </div>
+      <div class="form-entry">
+        <div class="form-year">Contínuo</div>
+        <div class="form-degree">Cursos e congressos internacionais</div>
+        <div class="form-inst">Atualização permanente em fisioterapia musculoesquelética</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ CARROSSEL PACIENTES ═══════════ -->
+  <section class="section section-black" id="carrossel-pacientes">
+    <div class="section-label reveal">Resultados reais</div>
+    <h2 class="section-title reveal">Pacientes que<br><em>voltaram a se mover</em></h2>
+    <p class="body-text reveal">Cada foto conta uma história de recuperação — de quem enfrentou uma cirurgia, uma lesão ou uma dor crônica, e encontrou no método Daniel Oliveira o caminho de volta.</p>
+
+    <div class="pac-carousel-wrap" id="pac-carousel">
+      <div class="pac-track" id="pac-track">
+        <!-- slides injetados por JS -->
+      </div>
+    </div>
+
+    <div class="pac-ctrl">
+      <div class="pac-dots" id="pac-dots"></div>
+      <div class="pac-navs">
+        <button class="c-btn" onclick="movePacCarousel(-1)">&#8592;</button>
+        <button class="c-btn" onclick="movePacCarousel(1)">&#8594;</button>
+      </div>
+    </div>
+
+    <!-- ✏️ EDITE: link do Instagram -->
+    <div style="margin-top:14px;">
+      <a href="https://instagram.com/danieloliveirafisio" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.4);border-bottom:1px solid rgba(255,255,255,0.15);padding-bottom:2px;">
+        Ver mais no Instagram →
+      </a>
+    </div>
+  </section>
+
+  <!-- ═══════════ DEPOIMENTOS ═══════════ -->
+  <section class="section" id="depoimentos">
+    <div class="section-label reveal">O que dizem os pacientes</div>
+    <h2 class="section-title reveal">Depoimentos que<br><em>falam por si</em></h2>
+
+    <div class="dep-list">
+
+      <!-- ✏️ DEPOIMENTO 1 -->
+      <div class="dep-item reveal">
+        <span class="dep-aspas">"</span>
+        <p class="dep-texto">Recomendo o profissional e o tratamento. Esteve comprometido comigo desde a cirurgia. Graças a ele consegui ganhar segurança nos 7 dias após a cirurgia para seguir em frente com o tratamento em Maceió. Aqui em Maceió estou sendo atendido por profissional indicado por ele.
+Além da competência técnica também possui competência emocional.</p>
+        <div class="dep-footer">
+          <div class="dep-linha"></div>
+          <div>
+            <div class="dep-autor">Enildo Amaral</div>
+            <div class="dep-detalhe">Artoplastia Total do Joelho</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ✏️ DEPOIMENTO 2 
+      <div class="dep-item reveal">
+        <span class="dep-aspas">"</span>
+        <p class="dep-texto">Fiz cirurgia no quadril e estava com muito medo da recuperação. O Daniel passou segurança desde a primeira avaliação. Cada etapa foi explicada, cada exercício tinha um motivo. Hoje estou sem dor e com qualidade de vida de volta.</p>
+        <div class="dep-footer">
+          <div class="dep-linha"></div>
+          <div>
+            <div class="dep-autor">Nome do Paciente</div>
+            <div class="dep-detalhe">Pós-operatório de quadril</div>
+          </div>
+        </div>
+      </div> -->
+
+      <!-- ✏️ DEPOIMENTO 3
+      <div class="dep-item reveal">
+        <span class="dep-aspas">"</span>
+        <p class="dep-texto">O que me surpreendeu foi a atenção individualizada. Nunca me senti um número. O Daniel conhecia minha evolução sessão a sessão, ajustava o plano conforme eu precisava. Resultado: alta funcional antes do prazo previsto pelo médico.</p>
+        <div class="dep-footer">
+          <div class="dep-linha"></div>
+          <div>
+            <div class="dep-autor">Nome do Paciente</div>
+            <div class="dep-detalhe">Reabilitação musculoesquelética</div>
+          </div>
+        </div>
+      </div> -->
+
+      <!-- ✏️ DEPOIMENTO 4 
+      <div class="dep-item reveal">
+        <span class="dep-aspas">"</span>
+        <p class="dep-texto">Fiz acompanhamento online com o Daniel morando em outro estado. Achei que seria difícil, mas a comunicação foi impecável, os exercícios foram adaptados para minha realidade e os resultados vieram. Recomendo sem hesitar.</p>
+        <div class="dep-footer">
+          <div class="dep-linha"></div>
+          <div>
+            <div class="dep-autor">Nome do Paciente</div>
+            <div class="dep-detalhe">Atendimento online · São Paulo, SP</div>
+          </div>
+        </div>
+      </div> -->
+
+      <!-- ✏️ DEPOIMENTO 5 
+      <div class="dep-item reveal">
+        <span class="dep-aspas">"</span>
+        <p class="dep-texto">Tentei outros fisioterapeutas antes e não tive resultado. Com o Daniel foi diferente desde o primeiro dia — avaliação detalhada, explicações claras e um plano que de fato fez sentido para o meu corpo. Hoje não tenho mais limitações no dia a dia.</p>
+        <div class="dep-footer">
+          <div class="dep-linha"></div>
+          <div>
+            <div class="dep-autor">Nome do Paciente</div>
+            <div class="dep-detalhe">Reabilitação de joelho · Recife, PE</div>
+          </div>
+        </div>
+      </div> -->
+
+    </div>
+  </section>
+
+  <!-- ═══════════ FORMULÁRIO DEPOIMENTO ═══════════ -->
+  <section class="section" id="enviar-depoimento" style="background: var(--gray-ll);">
+    <div class="section-label reveal">Deixe o seu relato</div>
+    <h2 class="section-title reveal">Quer compartilhar<br><em>sua experiência?</em></h2>
+
+    <p class="body-text reveal" style="margin-bottom: 0;">
+      Se o acompanhamento do Daniel fez diferença na sua recuperação, sua história pode inspirar outras pessoas. Preencha abaixo — Daniel avalia cada depoimento antes de publicar.
+    </p>
+
+       <!-- Exemplo: https://formspree.io/f/xyzabc12 -->
+    <form class="form-dep reveal" id="formDep" action="https://formspree.io/f/mgodngjd" method="POST">
+
+      <div class="form-dep-row">
+        <div class="form-dep-field">
+          <label class="form-dep-label" for="dep-nome">Nome e Sobrenome</label>
+          <input type="text" id="dep-nome" name="nome" placeholder="Digite seu nome" required maxlength="60">
+        </div>
+        <div class="form-dep-field">
+          <label class="form-dep-label" for="dep-sobrenome">Qual Tratamento?</label>
+          <input type="text" id="dep-sobrenome" name="sobrenome" placeholder="Motivo do tratamento" required maxlength="60">
+        </div>
+      </div>
+
+      <div class="form-dep-field form-dep-textarea">
+        <label class="form-dep-label" for="dep-texto">Depoimento</label>
+        <textarea id="dep-texto" name="depoimento" rows="5" placeholder="Conte sua experiência com o tratamento…" required maxlength="350"></textarea>
+        <div class="form-dep-char" id="dep-char">0 / 320 caracteres recomendados</div>
+      </div>
+
+      <!-- Campo oculto para identificar a origem -->
+      <input type="hidden" name="_subject" value="Novo depoimento recebido pelo site">
+      <input type="hidden" name="_next" value="">
+
+      <div class="form-dep-footer">
+        <span class="form-dep-nota">Seu depoimento será avaliado antes de ser publicado.</span>
+        <button type="submit" class="btn-dep-enviar" id="btn-enviar">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          Enviar depoimento
+        </button>
+      </div>
+
+      <div class="form-dep-status" id="dep-status"></div>
+    </form>
+  </section>
+
+  <!-- ═══════════ CTA FINAL ═══════════ -->
+  <section class="section section-green" id="cta">
+    <div class="section-label">Próximo passo</div>
+    <h2 class="section-title">Agende sua<br><em>avaliação</em></h2>
+
+    <div class="cta-quote reveal">
+      "Recuperação é processo — e eu estou com você em cada etapa."
+    </div>
+
+    <p class="body-text reveal" style="margin-bottom:32px;">
+      A avaliação é o ponto de partida. Em uma consulta individual, Daniel entende o seu caso, a sua cirurgia, o seu histórico — e constrói um plano a partir daí.
+    </p>
+
+    <!-- ✏️ EDITE: número WhatsApp -->
+    <a href="https://wa.me/5581983383676?text=Oi,%20tudo%20bem%3F%20Gostaria%20de%20marcar%20uma%20consulta%21" class="btn-wpp-big reveal" target="_blank" rel="noopener">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+      Falar pelo WhatsApp
+    </a>
+
+    <p class="cta-sub-note reveal">Atendimento presencial em Recife — e online em todo o Brasil</p>
+  </section>
+
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <footer>
+    <div class="footer-name">Daniel Oliveira</div>
+    <!-- ✏️ EDITE: CREFITO -->
+    <div class="footer-crefito">Fisioterapeuta</div>
+    <div class="footer-divider"></div>
+    <div class="footer-contacts">
+      <!-- ✏️ EDITE: contatos -->
+      Recife, PE · Online em todo o Brasil<br>
+      daniel.oliveira.fisiorecife@gmail.com · (81) 9 8338-3676
+    </div>
+    <div class="footer-copy">© 2026 Daniel Oliveira. Todos os direitos reservados.
+    <br><br>
+
+    <a href="https://wa.me/5581999046539?text=Olá,%20quero%20solicitar%20um%20site%20de%20vitrine%20profissional.%20(C1)" class="footer-site-link">
+      Solicite seu site profissional
+    </a>
+  </div>
+  </footer>
+
+  <!-- ═══════════ LIGHTBOX ═══════════ -->
+  <div id="lightbox" role="dialog" aria-modal="true">
+    <button id="lightbox-close" aria-label="Fechar" onclick="closeLightbox()">&#x2715;</button>
+    <button id="lightbox-prev" aria-label="Anterior" onclick="moveLightbox(-1)">&#8592;</button>
+    <img id="lightbox-img" src="" alt="" />
+    <button id="lightbox-next" aria-label="Próxima" onclick="moveLightbox(1)">&#8594;</button>
+    <div id="lightbox-counter"></div>
+  </div>
+
+  <!-- FAB WhatsApp -->
+  <!-- ✏️ EDITE: número WhatsApp -->
+  <a href="https://wa.me/5581983383676?text=Oi,%20tudo%20bem%3F%20Gostaria%20de%20marcar%20uma%20consulta%21" class="fab-wpp" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+  </a>
+
+  <script>
+    /* ════════════════════════════════
+       NAV SCROLL
+    ════════════════════════════════ */
+    window.addEventListener('scroll', () => {
+      document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    /* ════════════════════════════════
+       CARROSSEL FISIO
+       ✏️ Coloque fotos em: imagens/fisio/fisio1.jpg ... fisio5.jpg
+    ════════════════════════════════ */
+    const FISIO_PHOTOS = [
+      { src: 'imagens/fisio/fisio1.jpg', caption: 'Daniel Oliveira em atendimento' },
+      { src: 'imagens/fisio/fisio2.jpg', caption: 'Técnica de reabilitação' },
+      { src: 'imagens/fisio/fisio3.jpg', caption: 'Avaliação funcional' },
+      { src: 'imagens/fisio/fisio4.jpg', caption: 'Exercício terapêutico' },
+      { src: 'imagens/fisio/fisio5.jpg', caption: 'Terapia manual' },
+    ];
+    let fisioIdx = 0;
+
+    function buildFisioCarousel() {
+      const track = document.getElementById('fisio-track');
+      const dotsEl = document.getElementById('fisio-dots');
+      track.innerHTML = '';
+      dotsEl.innerHTML = '';
+
+      FISIO_PHOTOS.forEach((p, i) => {
+        const slide = document.createElement('div');
+        slide.className = 'carousel-slide';
+        slide.innerHTML = `<div class="img-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>${p.caption}</span></div>`;
+
+        const img = new Image();
+        img.onload = () => {
+          const imgEl = document.createElement('img');
+          imgEl.src = p.src; imgEl.alt = p.caption;
+          const cap = document.createElement('div');
+          cap.className = 'carousel-caption';
+          slide.innerHTML = '';
+          slide.appendChild(imgEl);
+        };
+        img.onerror = () => {};
+        img.src = p.src;
+
+        track.appendChild(slide);
+
+        const dot = document.createElement('button');
+        dot.className = 'dot' + (i === 0 ? ' active' : '');
+        dot.onclick = () => goFisio(i);
+        dotsEl.appendChild(dot);
+      });
+    }
+
+    function goFisio(n) {
+      fisioIdx = (n + FISIO_PHOTOS.length) % FISIO_PHOTOS.length;
+      document.getElementById('fisio-track').style.transform = `translateX(-${fisioIdx * 100}%)`;
+      document.querySelectorAll('#fisio-dots .dot').forEach((d, i) => d.classList.toggle('active', i === fisioIdx));
+    }
+
+    function moveCarousel(id, dir) {
+      if (id === 'fisio') goFisio(fisioIdx + dir);
+    }
+
+    /* ════════════════════════════════
+       CARROSSEL PACIENTES
+       ✏️ Coloque fotos em: imagens/pacientes/paciente1.jpg ... paciente30.jpg
+       - Todas as 30 fotos são exibidas desde o início
+    ════════════════════════════════ */
+    const PAC_ALL = 30; // total de fotos — todas carregam com a página
+
+    const PAC_PHOTOS = Array.from({ length: PAC_ALL }, (_, i) => ({
+      src: `imagens/pacientes/paciente${i + 1}.jpg`,
+      alt: `Resultado paciente ${i + 1}`
+    }));
+
+    let pacIdx = 0;
+    let pacLoaded = PAC_PHOTOS;
+
+    function addSlide(track, p) {
+      const slide = document.createElement('div');
+      slide.className = 'pac-slide';
+      slide.innerHTML = `<div class="img-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="1"/></svg></div>`;
+      const img = new Image();
+      img.onload = () => {
+        const imgEl = document.createElement('img');
+        imgEl.src = p.src; imgEl.alt = p.alt;
+        // Estilos inline garantem compatibilidade com Safari/iOS
+        imgEl.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;display:block;border-radius:2px;';
+        // Remove placeholder mantendo o ::before (que define a altura)
+        const placeholder = slide.querySelector('.img-placeholder');
+        if (placeholder) placeholder.remove();
+        slide.appendChild(imgEl);
+      };
+      img.onerror = () => {};
+      img.src = p.src;
+      // Abre lightbox ao clicar
+      slide.addEventListener('click', () => {
+        const idx = Array.from(document.querySelectorAll('.pac-slide')).indexOf(slide);
+        openLightbox(idx);
+      });
+      track.appendChild(slide);
+    }
+
+    function rebuildDots() {
+      const dotsEl = document.getElementById('pac-dots');
+      dotsEl.innerHTML = '';
+      const steps = Math.ceil(pacLoaded.length / 2);
+      for (let i = 0; i < steps; i++) {
+        const dot = document.createElement('button');
+        dot.className = 'dot' + (i === 0 ? ' active' : '');
+        dot.onclick = () => goPac(i * 2);
+        dotsEl.appendChild(dot);
+      }
+    }
+
+    function buildPacCarousel() {
+      const track = document.getElementById('pac-track');
+      track.innerHTML = '';
+      PAC_PHOTOS.forEach(p => addSlide(track, p));
+      rebuildDots();
+    }
+
+    function goPac(n) {
+      const max = pacLoaded.length - 2;
+      pacIdx = Math.max(0, Math.min(n, max));
+      const slideW = document.querySelector('.pac-slide')?.offsetWidth || 0;
+      document.getElementById('pac-track').style.transform = `translateX(-${pacIdx * (slideW + 10)}px)`;
+      const stepIdx = Math.round(pacIdx / 2);
+      document.querySelectorAll('#pac-dots .dot').forEach((d, i) => d.classList.toggle('active', i === stepIdx));
+    }
+
+    function movePacCarousel(dir) { goPac(pacIdx + dir * 2); }
+
+    /* ════════════════════════════════
+       LIGHTBOX
+    ════════════════════════════════ */
+    let lbIdx = 0;
+
+    function getAllPacSrcs() {
+      return Array.from(document.querySelectorAll('.pac-slide img')).map(i => ({ src: i.src, alt: i.alt }));
+    }
+
+    function openLightbox(idx) {
+      const photos = getAllPacSrcs();
+      if (!photos.length) return;
+      lbIdx = idx;
+      updateLightbox(photos);
+      document.getElementById('lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function moveLightbox(dir) {
+      const photos = getAllPacSrcs();
+      lbIdx = (lbIdx + dir + photos.length) % photos.length;
+      updateLightbox(photos);
+    }
+
+    function updateLightbox(photos) {
+      const img = document.getElementById('lightbox-img');
+      img.style.opacity = '0';
+      img.style.transform = 'scale(0.95)';
+      setTimeout(() => {
+        img.src = photos[lbIdx].src;
+        img.alt = photos[lbIdx].alt;
+        img.style.opacity = '';
+        img.style.transform = '';
+      }, 150);
+      document.getElementById('lightbox-counter').textContent = `${lbIdx + 1} / ${photos.length}`;
+    }
+
+    // Fechar clicando no fundo ou tecla ESC
+    document.getElementById('lightbox').addEventListener('click', function(e) {
+      if (e.target === this) closeLightbox();
+    });
+    document.addEventListener('keydown', e => {
+      const lb = document.getElementById('lightbox');
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') moveLightbox(-1);
+      if (e.key === 'ArrowRight') moveLightbox(1);
+    });
+
+    // Swipe no lightbox
+    (function() {
+      let sx = 0;
+      const lb = document.getElementById('lightbox');
+      lb.addEventListener('touchstart', e => sx = e.touches[0].clientX, { passive: true });
+      lb.addEventListener('touchend', e => {
+        const dx = e.changedTouches[0].clientX - sx;
+        if (Math.abs(dx) > 40) moveLightbox(dx > 0 ? -1 : 1);
+      });
+    })();
+
+    /* ════════════════════════════════
+       SWIPE
+    ════════════════════════════════ */
+    function addSwipe(el, cb) {
+      let sx = 0;
+      el.addEventListener('touchstart', e => sx = e.touches[0].clientX, { passive: true });
+      el.addEventListener('touchend', e => {
+        const dx = e.changedTouches[0].clientX - sx;
+        if (Math.abs(dx) > 40) cb(dx > 0 ? -1 : 1);
+      });
+    }
+
+    buildFisioCarousel();
+    buildPacCarousel();
+    addSwipe(document.getElementById('fisio-carousel'), d => moveCarousel('fisio', d));
+    addSwipe(document.getElementById('pac-carousel'), d => movePacCarousel(d));
+    window.addEventListener('resize', () => goPac(pacIdx));
+    setInterval(() => goFisio(fisioIdx + 1), 5000);
+
+    /* ════════════════════════════════
+       REVEAL ON SCROLL
+    ════════════════════════════════ */
+    const io = new IntersectionObserver(
+      e => e.forEach(x => x.isIntersecting && x.target.classList.add('visible')),
+      { threshold: 0.08 }
+    );
+    document.querySelectorAll('.reveal').forEach(r => io.observe(r));
+    /* ════════════════════════════════
+       FORMULÁRIO DEPOIMENTO (Formspree)
+    ════════════════════════════════ */
+    (function () {
+      const textarea = document.getElementById('dep-texto');
+      const charEl   = document.getElementById('dep-char');
+      const form     = document.getElementById('formDep');
+      const btn      = document.getElementById('btn-enviar');
+      const status   = document.getElementById('dep-status');
+
+      if (!textarea) return;
+
+      textarea.addEventListener('input', () => {
+        const n = textarea.value.length;
+        charEl.textContent = n + ' / 320 caracteres recomendados';
+        charEl.classList.toggle('over', n > 350);
+      });
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        btn.disabled = true;
+        btn.textContent = 'Enviando…';
+        status.className = 'form-dep-status';
+        status.textContent = '';
+
+        try {
+          const res = await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { 'Accept': 'application/json' }
+          });
+
+          if (res.ok) {
+            status.textContent = 'Depoimento enviado! Daniel vai analisar em breve. Obrigado 🙏';
+            status.className = 'form-dep-status ok';
+            form.reset();
+            charEl.textContent = '0 / 320 caracteres recomendados';
+            charEl.classList.remove('over');
+            btn.textContent = 'Enviado ✓';
+          } else {
+            throw new Error();
+          }
+        } catch {
+          status.textContent = 'Não foi possível enviar. Tente novamente ou entre em contato pelo WhatsApp.';
+          status.className = 'form-dep-status err';
+          btn.disabled = false;
+          btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Enviar depoimento';
+        }
+      });
+    })();
+
+  </script>
+</body>
+</html>
